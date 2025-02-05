@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact-Form</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <form action="#" id="Contact-Form">
+      <h1>Contact Form</h1>
+      <p>Please enter the necessary data in the sections below!</p>
+      <div class="form-inputs">
+        <label for="fname">
+          First Name:
+          <input
+            type="text"
+            name="fname"
+            placeholder="Enter First Name"
+            required
+          />
+        </label>
+        <label for="lname">
+          Last Name:
+          <input
+            type="text"
+            name="lname"
+            placeholder="Enter Last Name"
+            required
+          />
+        </label>
+        <label for="email">
+          Email:
+          <input type="email" name="email" placeholder="Enter Email" required />
+        </label>
+        <label for="message">
+          Message:
+          <textarea
+            cols="50"
+            rows="10"
+            type="text"
+            name="message"
+            placeholder="Write a message to us"
+          ></textarea>
+        </label>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+    <p id="reponseMessage"></p>
+    <script>
+      document
+        .getElementById("Contact-Form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const formData = new FormData(this);
+          const response = await fetch("/submit", {
+            method: "POST",
+            body: formData,
+          });
+
+          result = await response.json();
+          console.log("Result", result.message);
+          resultDiv = document.getElementById('reponseMessage').innerText = result.message;
+        });
+    </script>
+  </body>
+</html>
